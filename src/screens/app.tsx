@@ -10,6 +10,7 @@ import { IconButton } from "@/components/icon-button";
 import { CircleButton } from "@/components/circle-button";
 import { EmojiPicker } from "@/components/emoji-picker";
 import { EmojiList } from "@/components/emoji-list";
+import { EmojiSticker } from "@/components/emoji-sticker";
 
 const PlaceholderImage =
   require("@/assets/images/background-image.png") as ImageSourcePropType;
@@ -61,6 +62,9 @@ const App: FC = () => {
     <View style={styles.container}>
       <View style={styles.imageContainer}>
         <ImageViewer placeholderImageSource={PlaceholderImage} selectedImage={selectedImage} />
+        {pickedEmoji && (
+         <EmojiSticker imageSize={40} stickerSource={pickedEmoji} />
+       )}
       </View>
       <EmojiPicker isVisible={isModalVisible} onClose={onModalClose}>
         <EmojiList onSelect={setPickedEmoji} onCloseModal={onModalClose} />
