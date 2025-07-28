@@ -1,23 +1,40 @@
 {
   "name": "react-native-expo-tutorial",
   "version": "1.0.0",
-  "main": "index.ts",
+  "main": "src/screens/app.tsx",
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
-    "web": "expo start --web"
+    "web": "expo start --web",
+    "typecheck": "tsc --noEmit",
+    "format": "prettier --check \"**/*.{ts,tsx,js,jsx,cjs,mjs,md,json,lintstagedrc}\"",
+    "format:fix": "prettier --write \"**/*.{ts,tsx,js,jsx,cjs,mjs,md,json,lintstagedrc}\""
   },
   "dependencies": {
+    "@expo/metro-runtime": "~5.0.4",
     "expo": "~53.0.20",
     "expo-status-bar": "~2.2.3",
     "react": "19.0.0",
-    "react-native": "0.79.5"
+    "react-dom": "19.0.0",
+    "react-native": "0.79.5",
+    "react-native-web": "^0.20.0",
+    "@expo/vector-icons": "^14.1.0",
+    "expo-image-picker": "~16.1.4"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
+    "@eslint/js": "^9.31.0",
+    "@ianvs/prettier-plugin-sort-imports": "^4.5.1",
     "@types/react": "~19.0.10",
-    "typescript": "~5.8.3"
+    "eslint": "^9.31.0",
+    "eslint-plugin-react": "^7.37.5",
+    "globals": "^16.3.0",
+    "prettier": "^3.6.2",
+    "prettier-plugin-tailwindcss": "^0.6.14",
+    "typescript": "~5.8.3",
+    "typescript-eslint": "^8.38.0"
   },
-  "private": true
+  "private": true,
+  "packageManager": "pnpm@10.13.1+sha512.37ebf1a5c7a30d5fabe0c5df44ee8da4c965ca0c5af3dbab28c3a1681b70a256218d05c81c9c0dcf767ef6b8551eb5b960042b9ed4300c59242336377e01cfad"
 }
