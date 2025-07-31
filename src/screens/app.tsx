@@ -60,7 +60,7 @@ const App: FC = () => {
   console.log(showAppOptions);
 
   return (
-    <GestureHandlerRootView style={styles.container}></GestureHandlerRootView>
+    <GestureHandlerRootView style={styles.container}>
       <View style={styles.imageContainer}>
         <ImageViewer placeholderImageSource={PlaceholderImage} selectedImage={selectedImage} />
         {pickedEmoji && (
