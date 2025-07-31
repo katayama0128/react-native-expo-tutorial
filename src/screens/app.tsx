@@ -1,8 +1,10 @@
-import { type FC, useState } from "react";
+import { type FC, useState, useRef } from "react";
 import { StyleSheet, View, type ImageSourcePropType } from "react-native";
 import { registerRootComponent } from "expo";
 import { StatusBar } from "expo-status-bar";
 import * as ImagePicker from "expo-image-picker";
+import * as MediaLibrary from 'expo-media-library';
+import { captureRef } from "react-native-view-shot";
 
 import { Button } from "@/components/button";
 import { ImageViewer } from "@/components/image-viewer";
@@ -23,6 +25,12 @@ const App: FC = () => {
   const [pickedEmoji, setPickedEmoji] = useState<ImageSourcePropType | null>(
    null,
   );
+  const [status, requestPermission] = MediaLibrary.usePermissions();
+  const imageRef = useRef<View>(null);
+
+  if (status === null) {
+    void requestPermission();
+  }
 
   const onModalClose = () => {
    setIsModalVisible(false);
@@ -37,7 +45,19 @@ const App: FC = () => {
   };
 
   const onSaveImageAsync = async () => {
-    // 後ほど追加します
+    try {
+      const localUri = await captureRef(imageRef, {
+        height: 440,
+        quality: 1,
+      });
+
+      await MediaLibrary.saveToLibraryAsync(localUri);
+      if (localUri) {
+        alert("保存しました!");
+      }
+    } catch (e) {
+      console.log(e);
+    }
   };
 
 
@@ -62,10 +82,12 @@ const App: FC = () => {
   return (
     <GestureHandlerRootView style={styles.container}>
       <View style={styles.imageContainer}>
+        <View ref={imageRef} collapsable={false}>
         <ImageViewer placeholderImageSource={PlaceholderImage} selectedImage={selectedImage} />
         {pickedEmoji && (
          <EmojiSticker imageSize={40} stickerSource={pickedEmoji} />
        )}
+      </View>
       </View>
       <EmojiPicker isVisible={isModalVisible} onClose={onModalClose}>
         <EmojiList onSelect={setPickedEmoji} onCloseModal={onModalClose} />
