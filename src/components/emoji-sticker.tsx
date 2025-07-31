@@ -47,6 +47,8 @@ export const EmojiSticker: FC<EmojiStickerProps> = (props) => {
     .onStart(() => {
       if (scaleImage.value !== props.imageSize * 2) {
         scaleImage.value = scaleImage.value * 2;
+      } else {
+        scaleImage.value = Math.round(scaleImage.value / 2);
       }
     });
 
